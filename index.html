@@ -6,9 +6,19 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <button id="playerChoice" class = "rock">Rock</button>
-        <button id="playerChoice" class = "paper">Paper</button>
-        <button id="playerChoice" class = "scissor">Scissor</button>
-        <script src="myscript.js"></script>
+        <div class="playing_area">
+            <div class = "title"> Rock, Paper, Scissor</div>
+            <div class="player_choices">
+                <button class="player_button" id = "rock">Rock</button>
+                <button class="player_button" id = "paper">Paper</button>
+                <button class="player_button" id = "scissor">Scissor</button>
+            </div>
+            <script src="myscript.js"></script>
+            <div class = "score_board">
+                <div class="score" id="player_score">Player Score = 0</div>
+                <div class="score" id="bot_score">Bot Score = 0</div>
+            </div>
+            <script src="myscript.js"></script>
+        </div>
     </body>
 </html>

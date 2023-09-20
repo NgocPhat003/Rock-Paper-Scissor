@@ -41,35 +41,6 @@ function playRound(playerSelection, computerSelection){
     
 }
 
-/*function game(){
-    console.log('Let play Rock Paper Scissor!')
-    let compScore = 0;
-    let playerScore = 0;
-    for(let i=0; i<5; i++){
-        let playerChoice = prompt('Choose Rock, Paper or Scissor')
-        let computerChoice = getComputerChoice()
-        let result = playRound(playerChoice,computerChoice);
-        console.log('Computer chooses: ' + computerChoice);
-        console.log('Player chooses: '+ playerChoice);
-        console.log(result);
-        // check the result to count the scores
-        if(result.search('Won')!=-1)
-            playerScore++;
-        else if(result.search('Lose')!=-1)
-            compScore++;
-    }
-    // output the final scores and the winner
-    console.log('Computer score: '+ compScore)
-    console.log('Player sroce: ' + playerScore)
-        
-    if(compScore>playerScore)
-        console.log('Computer wins!')
-    else if(compScore<playerScore)
-        console.log('Player wins!')
-    else
-        console.log('Draw!!!')
-        
-}*/
 
 
 const body = document.body;
@@ -79,12 +50,10 @@ function game(){
     let compScore = 0;
     let playerScore = 0;
     
-    const result_div = document.createElement('div');
-    result_div.textContent = `Player Score = ${playerScore}\n
-                                Computer Score = ${compScore}`;
+    
     const buttons = document.querySelectorAll('button');
 
-    body.appendChild(result_div);
+    
     const round_result = document.createElement('div');
     // Content to output each round play
     
@@ -93,25 +62,16 @@ function game(){
     let playerChoice = ' ';
     let compChoice = ' ';
         buttons.forEach((button) => {
-            button.addEventListener('click', function(e){
-                if(button.className === 'reset'){
-                    console.log('clicked');
-                    compScore = 0 ;
-                    body.removeChild(play_again_button);
-                    result_div.textContent = `Player Score = ${playerScore}\n
-                                Computer Score = ${compScore}`;
-                    body.appendChild(result_div);  
-                }
-                
+            button.addEventListener('click', function(e){        
                 if(playerScore === 5 || compScore ===5)
                     return;
 
-                if(button.className === 'rock'){
+                if(button.id === 'rock'){
                     playerChoice = 'rock';
                     compChoice = getComputerChoice()
                     
                 }
-                else if(button.className === 'paper'){
+                else if(button.id === 'paper'){
                     playerChoice = 'paper';
                     compChoice = getComputerChoice()
                 }
@@ -133,9 +93,9 @@ function game(){
                 else{
                     body.appendChild(round_result);
                 }
-                result_div.textContent = `Player Score = ${playerScore}\n
-                                Computer Score = ${compScore}`;
-                body.appendChild(result_div);
+                const currentPlayerScore = document.querySelector("#player_score").innerHTML = `Player Score = ${playerScore}`;
+                const currrentCompScore = document.querySelector("#bot_score").innerHTML = `Bot Score = ${compScore}`;
+                
 
                 const winner = document.createElement('div');
                 if(compScore === 5 || playerScore === 5){
@@ -151,8 +111,13 @@ function game(){
                     }
                     const play_again_button = document.createElement('button');
                     play_again_button.textContent = 'Play again';
-                    play_again_button.setAttribute('id','reset')
+                    play_again_button.setAttribute('id','reset');
+                    play_again_button.onclick = function(){location.reload()};
                     body.appendChild(play_again_button);
+
+                    var play_again_script = document.createElement('script');
+                    play_again_script.setAttribute('src','playagain.js');
+                    body.appendChild(play_again_script);
                 }
 
             });
