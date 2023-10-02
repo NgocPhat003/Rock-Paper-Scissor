@@ -1,15 +1,37 @@
+// main title typing text effect,
 
+document.addEventListener('DOMContentLoaded', function(e){
+    let title = 'Rock, Paper, Scissor'
+    function typeWriter(text, i) {
+        // check if text isn't finished yet
+        if(i < (text.length)){
+            // add next character to title
+            document.getElementById(`game_title`).innerHTML = text.substring(0, i+1) + '<span aria-hidden="true"></span>';
+
+            // wait for a moment before call this function for the next 
+            // character
+
+            setTimeout(() => {
+                typeWriter(text, i+1)
+            }, 100);
+        }
+    }
+
+    typeWriter(title,1);
+}); 
+
+// function to generate computer choice
 function getComputerChoice(){
     let choices = ['rock', 'paper', 'scissor'];
     let theChoice = Math.floor(Math.random() * 3);
     return choices[theChoice];
 }
 
-
+// function to play a round
 function playRound(playerSelection, computerSelection){
     // make the selection string to lowercase for them to be case insensitive
     let playerSelectionClone = playerSelection.toString().toLowerCase();
-    // make differect cases for computer choices
+    // make different cases for computer choices
     // then for each cases of the computer choices, compare them to player choice
     if(computerSelection === 'rock') {
 
@@ -46,6 +68,7 @@ function playRound(playerSelection, computerSelection){
 const body = document.body;
 
 
+// main function that control the game
 function game(){
     let compScore = 0;
     let playerScore = 0;
@@ -53,8 +76,6 @@ function game(){
     
     const buttons = document.querySelectorAll('button');
 
-    
-    const round_result = document.createElement('div');
     // Content to output each round play
     
     
@@ -81,25 +102,24 @@ function game(){
                 }
 
                 let result = playRound(playerChoice,compChoice);
-                round_result.textContent = result;
+            
                 if(result.search('Won')!=-1){
                     playerScore++;
-                    body.appendChild(round_result);
                 }
                 else if(result.search('Lose')!=-1){
                     compScore++;
-                    body.appendChild(round_result);
                 }
                 else{
-                    body.appendChild(round_result);
+                    
                 }
-                const currentPlayerScore = document.querySelector("#player_score").innerHTML = `Player Score = ${playerScore}`;
-                const currrentCompScore = document.querySelector("#bot_score").innerHTML = `Bot Score = ${compScore}`;
+                document.querySelector("#player_score").innerHTML = `Player Score = ${playerScore}`;
+                document.querySelector("#bot_score").innerHTML = `Bot Score = ${compScore}`;
                 
-
+                // When the game is finished
                 const winner = document.createElement('div');
                 if(compScore === 5 || playerScore === 5){
                     if(compScore === 5){
+                        // Show the winner
                         winner.textContent = 'Computer Won !!!!';
                         body.appendChild(winner);
                         
@@ -109,15 +129,12 @@ function game(){
                         body.appendChild(winner);
                         
                     }
+                    // Add a button to restart the game when finished
                     const play_again_button = document.createElement('button');
                     play_again_button.textContent = 'Play again';
                     play_again_button.setAttribute('id','reset');
                     play_again_button.onclick = function(){location.reload()};
                     body.appendChild(play_again_button);
-
-                    var play_again_script = document.createElement('script');
-                    play_again_script.setAttribute('src','playagain.js');
-                    body.appendChild(play_again_script);
                 }
 
             });

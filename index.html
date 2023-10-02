@@ -7,13 +7,15 @@
     </head>
     <body>
         <div class="playing_area">
-            <div class = "title"> Rock, Paper, Scissor</div>
-            <div class="player_choices">
-                <button class="player_button" id = "rock">Rock</button>
-                <button class="player_button" id = "paper">Paper</button>
-                <button class="player_button" id = "scissor">Scissor</button>
+            <div id = "game_title">start</div>
+            <div class="player_section">
+                <div class="player_header">Player</div>
+                <div class="player_selection">
+                    <button class="player_button" id = "rock"> <image src="images/rock_player.png"></image> </button>
+                    <button class="player_button" id = "paper"> <image src="images/paper_player.png"></image> </button>
+                    <button class="player_button" id = "scissor"> <image src="images/scissor_player.png"></image> </button>
+                </div>
             </div>
-            <script src="myscript.js"></script>
             <div class = "score_board">
                 <div class="score" id="player_score">Player Score = 0</div>
                 <div class="score" id="bot_score">Bot Score = 0</div>
